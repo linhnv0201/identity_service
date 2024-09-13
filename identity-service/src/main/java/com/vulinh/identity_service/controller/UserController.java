@@ -1,5 +1,6 @@
 package com.vulinh.identity_service.controller;
 
+import com.vulinh.identity_service.dto.request.ApiResponse;
 import com.vulinh.identity_service.dto.request.UserCreationRequest;
 import com.vulinh.identity_service.dto.request.UserUpdateRequest;
 import com.vulinh.identity_service.entity.User;
@@ -17,8 +18,10 @@ public class UserController {
     private UserService userService;
 
     @PostMapping()
-    User addUser(@RequestBody @Valid UserCreationRequest request) {
-       return userService.createUser(request);
+    ApiResponse<User> addUser(@RequestBody @Valid UserCreationRequest request) {
+       ApiResponse<User> apiResponse = new ApiResponse<>();
+       apiResponse.setResult(userService.createUser(request));
+       return apiResponse;
     }
 
     @GetMapping()

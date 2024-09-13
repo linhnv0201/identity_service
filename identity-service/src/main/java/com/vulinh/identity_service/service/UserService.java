@@ -3,6 +3,8 @@ package com.vulinh.identity_service.service;
 import com.vulinh.identity_service.dto.request.UserCreationRequest;
 import com.vulinh.identity_service.dto.request.UserUpdateRequest;
 import com.vulinh.identity_service.entity.User;
+import com.vulinh.identity_service.exception.AppException;
+import com.vulinh.identity_service.exception.ErrorCode;
 import com.vulinh.identity_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,7 @@ public class UserService {
     public User createUser(UserCreationRequest request) {
         User user = new User();
         if (userRepository.existsByUsername(request.getUsername())) {
-            throw new RuntimeException("Username already exists");
+            throw new AppException(ErrorCode.USER_EXISTED);
         }
         user.setUsername(request.getUsername());
         user.setPassword(request.getPassword());
