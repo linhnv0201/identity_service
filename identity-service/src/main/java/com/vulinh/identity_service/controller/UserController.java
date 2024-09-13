@@ -4,6 +4,7 @@ import com.vulinh.identity_service.dto.request.UserCreationRequest;
 import com.vulinh.identity_service.dto.request.UserUpdateRequest;
 import com.vulinh.identity_service.entity.User;
 import com.vulinh.identity_service.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +17,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping()
-    User addUser(@RequestBody UserCreationRequest request) {
-       return userService.createRequest(request);
+    User addUser(@RequestBody @Valid UserCreationRequest request) {
+       return userService.createUser(request);
     }
 
     @GetMapping()
