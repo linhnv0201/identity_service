@@ -1,19 +1,25 @@
 package com.vulinh.identity_service.dto.request;
 
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE) //ko can khai bao private
+//@Data bao gom 2 cai tren getter setter
+// @allargscontrucs @noargs
+//@buider
 public class UserCreationRequest {
     @Size(min = 3, message = "USERNAME_INVALID")
-    private String username;
+     String username;
     @Size(min = 8, message = "INVALID_PASSWORD")
-    private String password;
-    private String firstName;
-    private String lastName;
-    private LocalDate dob;
+     String password;
+     String firstName;
+     String lastName;
+     LocalDate dob;
 }
